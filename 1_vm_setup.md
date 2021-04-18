@@ -1,2 +1,67 @@
 # Virtual Machine Setup
-asdf
+This section will help you to configure your kali VM that you can use to reproduce the topics covered during the presentation.
+
+1. Full screen your VM
+   * On Mac OS you can use Command-F
+   * On Linux you can use Right Ctrl-F
+
+2. Change the default password
+
+   As you're probably aware, `vagrant/vagrant` is not the most secure password combination out there. Let's fix that real quick. Open a terminal by clicking this icon in the upper left-hand corner of the screen:
+
+   ![](images/terminal_location.png)
+
+   Next, run this command:
+   ```
+   sudo passwd vagrant
+   ```
+
+   When prompted, enter in whatever password you desire. The next time you log in, this will be the password that you use for the vagrant user.
+
+3. Install Docker
+
+   Docker is used to run containers. Containers are used to package applications and be able to run them anywhere. There's plenty more information on the internet that I encourage you to read. Run these commands to install Docker:
+   ```
+   wget https://github.com/l50/unm_ismart_presentation/scripts/install_docker.sh
+   bash install_docker.sh
+   ```
+
+   Finish up the install by rebooting your VM:
+   ```
+   sudo reboot
+   ```
+
+4. Start Burp
+
+   Burp Suite is a proxy that you can use to intercept web traffic. It is immensely helpful when it comes to web application security, and I'm of the opinion that most (if not all) security professionals should have some familiarity. To run it, type this command into a terminal window:
+   ```
+   burpsuite
+   ```
+
+   Check the box next to **Don't show again for this JRE** and click **OK** when you see this message:
+
+   ![](images/burp_warning.png)
+
+   Click **I Accept** for the terms and conditions.
+
+   If there's an update available, go ahead and click **Close**. At this point, you should be at this window:
+
+   ![](images/burp_start.png)
+
+   Go ahead and click **Next** and then **Start Burp**
+
+   Burp should now be running. It'll probably look like this:
+   
+   ![](images/burp_start.png)
+
+   Burp should be running. Go ahead and click on **Proxy** and then click **Intercept is on** to turn intercept mode off for now.
+
+   Next, click **Open Browser**. Generally speaking, this is the window configuration I like to have when I'm working with Burp:
+
+   ![](images/burp_window_layout.png)
+
+   Please feel free to click **Cancel** if you see a pop up like this one:
+
+   ![](images/annoying_popup.png)
+
+At this point, you should feel free to move on to [Web Basics](2_web_basics.md).

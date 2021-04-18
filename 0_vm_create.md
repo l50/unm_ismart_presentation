@@ -2,11 +2,9 @@
 This section will help you to create your kali VM that you can use to reproduce the topics covered during the presentation via [Vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/). 
 
 If you want to use Windows, all of the products appear to be supported, but we're not going to cover that here. Good luck!
-
 1. Install dependencies
    * Vagrant: https://www.vagrantup.com/downloads
    * VirtualBox: https://www.virtualbox.org/wiki/Downloads
-   * Vagrant Guest Additions Plugin: https://github.com/dotless-de/vagrant-vbguest
 
 2. Get your active network interface by running this script on Linux or Mac OS
    ```
@@ -33,11 +31,13 @@ If you want to use Windows, all of the products appear to be supported, but we'r
 
     ![](images/answer_vagrant_question.png)
 
-4. Login to the VM 
-   Once you see this prompt:
+4. Login to the VM
+  
+   Once you see this window:
+
    ![](images/login_prompt.png)
 
-   You will need to login to the system. The credentials are:
+   You will be ready to authenticate to the system. The credentials are:
    * Username: `vagrant`
    * Password: `vagrant`
 
