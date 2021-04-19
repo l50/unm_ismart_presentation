@@ -6,7 +6,7 @@ Now that we have a sense of how HTTP works, let's see some of the things we disc
 ## Enable Capturing Responses
 1. Click **Proxy**
 2. Click **Options**
-3. Under **Intercept Server Responses**, click **Intercept responses based on the following rules:**
+3. Under **Intercept Server Responses**, check the box next to **Intercept responses based on the following rules:**
 
 ## Observing what happens when we go to a site
 1. Click the **Intercept** tab

@@ -22,8 +22,8 @@ This section will help you to configure your kali VM that you can use to reprodu
 
    Docker is used to run containers. Containers are used to package applications and be able to run them anywhere. There's plenty more information on the internet that I encourage you to read. Run these commands to install Docker:
    ```
-   wget https://github.com/l50/unm_ismart_presentation/scripts/install_docker.sh
-   bash install_docker.sh
+   wget https://github.com/l50/unm_ismart_presentation/scripts/kali_docker.sh
+   bash kali_docker.sh
    ```
 
    Finish up the install by rebooting your VM:
@@ -42,7 +42,7 @@ This section will help you to configure your kali VM that you can use to reprodu
 
    ![](images/burp_warning.png)
 
-   Click **I Accept** for the terms and conditions.
+   Click **I Agree** for the terms and conditions.
 
    If there's an update available, go ahead and click **Close**. At this point, you should be at this window:
 

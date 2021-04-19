@@ -106,7 +106,7 @@ This resulted in one javascript file being singled out, `main-es2018.js`.
 
 We can look closer by clicking the name of the file in the left-hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
 
-![](pp.png)
+![](images/pp.png)
 
 Now you should be able to click on the file and do another search specific to that file for the same thing by typing Ctrl-f. This will open a search window that's different from the one you used earlier by typing Ctrl-Shift-f. Enable regular expressions and use the same search that we used previously while looking through all files (`"\/\w+`).
 
