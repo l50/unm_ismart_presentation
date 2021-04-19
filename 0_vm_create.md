@@ -42,7 +42,7 @@ If you want to use Windows, all of the products appear to be supported, but we'r
    * Password: `vagrant`
 
 ## Stop the VM
-Once you're finished, you can stop the vm with:
+Once you're finished, you can stop the VM with:
 ```
 vagrant halt
 ```

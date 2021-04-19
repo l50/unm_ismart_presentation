@@ -1,9 +1,9 @@
 # Virtual Machine Setup
 This section will help you to configure your kali VM that you can use to reproduce the topics covered during the presentation.
 
-1. Full screen your VM
-   * On Mac OS you can use Command-F
-   * On Linux you can use Right Ctrl-F
+1. Fullscreen your VM
+   * On Mac OS, you can use Command-F
+   * On Linux, you can use Right Ctrl-F
 
 2. Change the default password
 
@@ -16,7 +16,7 @@ This section will help you to configure your kali VM that you can use to reprodu
    sudo passwd vagrant
    ```
 
-   When prompted, enter in whatever password you desire. The next time you log in, this will be the password that you use for the vagrant user.
+   When prompted, enter whatever password you desire. The next time you log in, this will be the password that you use for the vagrant user.
 
 3. Install Docker
 

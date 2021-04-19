@@ -1,8 +1,8 @@
 # Vulnerable Targets
-This section brings together all of the things that we've done so far. We're going to apply some of what we learned about web to attack some intentionally vulnerable targets.
+This section brings together all of the things that we've done so far. We're going to apply some of what we learned about the web to attack some intentionally vulnerable targets.
 
 ## Using Docker to get intentionally vulnerable applications
-Docker is a subject that we could talk about for hours on end. One application that is especially helpful for aspiring security folks like yourselves is standing up intentionally vulnerable web applications. I'm going to throw you all in the deep end a bit here; we're going to be learning a bit about docker as we go along, and it'll probably be really overwhelming. That's why this stuff is online, so you can revisit it later.
+Docker is a subject that we could talk about for hours on end. One application that is especially helpful for aspiring security folks like yourselves is standing up intentionally vulnerable web applications. I'm going to throw you all in the deep end a bit here; we're going to be learning a bit about docker as we go along, and it'll probably be overwhelming. That's why this stuff is online, so you can revisit it later.
 
 Let's start with one of my favorites, the OWASP Juice Shop.
 
@@ -34,10 +34,10 @@ At this point, the container is no longer running. Confirm this by navigating to
 
 Now you should be able to just type `juice` and hit enter to start a new one. Confirm this by navigating to [http://localhost:3005](http://localhost:3005) in your web browser.
 
-Note that each time you do this, you will lose your progress. You can save and restore your progress through buttons in the score board if you'd like.
+Note that each time you stop and start the container, you will lose your progress. This applies to all containers - if you don't have a mounted volume for whatever data you're working with, you're going to lose it if you lose the container. For this particular one, you can save and restore your progress through buttons on the scoreboard if you'd like.
 
 ### Getting a shell to a running container
-If we wanted to get a better sense for how this application was running, we can get a shell to the container and start digging around.
+If we wanted to get a better sense of how this application was running, we can get a shell to the container and start digging around.
 
 1. This command will get you a shell to the container:
    ```
@@ -57,10 +57,10 @@ If we wanted to get a better sense for how this application was running, we can 
    
    If you're curious, you can execute this command: `cat build/app.js` to view the contents of that particular file.
 
-   I encourage you to spend more time looking around later to get a better sense for how the application is running.
+   I encourage you to spend more time looking around later to get a better sense of how the application is running.
 
 ### Attack Methodology
-Generally when I'm looking at a target I like to review the source code if it is made available. In this case, we can view the source code [here](https://github.com/bkimminich/juice-shop), since this is an open source project. 
+Generally, when I'm looking at a target I like to review the source code if it is made available. In this case, we can view the source code [here](https://github.com/bkimminich/juice-shop), since this is an open-source project. 
 
 We will touch a teensy bit on finding vulnerabilities through source code review, but you should really invest time in learning it. It makes you a substantially better hacker.
 
@@ -68,31 +68,31 @@ We will touch a teensy bit on finding vulnerabilities through source code review
 Let's touch on some common vulnerabilities in web applications. In particular, how to find them, and why they're a concern.
 
 ### Hidden paths in source code
-Web applications tend to have a number of endpoints that a user can browse to. For example, if we click the side menu and then click on **Customer Feedback**:
+Web applications tend to have several endpoints that a user can browse to. For example, if we click the side menu and then click on **Customer Feedback**:
 
 ![](images/sidemenu.png)
 
 we will be taken to [http://localhost:3005/#/contact](http://localhost:3005/#/contact). In this case, the endpoint is `/contact`. It follows a `#`, which is used to signal that a fragment identifier will follow it. A fragment identifier is used to grab a resource from the HTML of a given page. It should be noted that this is a client-side operation, which means that anything following a `#` will not be sent back to the server.
 
-To get a better sense of what this means, type Ctrl-Shift-I to pull up open a smaller window in the right hand side of your screen. Let's go ahead and detach this window to make our lives easier by clicking the three vertical dots in that menu and then clicking this button:
+To get a better sense of what this means, type Ctrl-Shift-I to pull up open a smaller window on the right-hand side of your screen. Let's go ahead and detach this window to make our lives easier by clicking the three vertical dots in that menu and then clicking this button:
 
 ![](images/devtools_doc.png) 
 
-Next, click the **Elements** tab. You should now have a representation of the DOM that you can view. This has the HTML that makes up the page that you're interacting with in your browser. Type in Ctrl-f to search for something in the page. Input `#/contact` and hit enter. You should see something similar to this:
+Next, click the **Elements** tab. You should now have a representation of the DOM that you can view. This has the HTML that makes up the page that you're interacting with in your browser. Type in Ctrl-f to search for something on the page. Input `#/contact` and hit enter. You should see something similar to this:
 
 ![](images/search_dom.png)
 
-It appears that in this case the `#` refers to a Hyptertext REFerence (`href`): `href="#/contact"`. If you're not familiar, an `href` is used to link to another page on a site. By inputting `#/contact`, we are signaling to our browser that it should try and navigate to that part of the page. These are used quite a bit these days because of the prevalence of single-page applications (SPA) - you should read up on these as they're out of the scope of this talk.
+It appears that in this case, the `#` refers to a Hypertext REFerence (`href`): `href="#/contact"`. If you're not familiar, an `href` is used to link to another page on a site. By inputting `#/contact`, we are signaling to our browser that it should try and navigate to that part of the page. These are used quite a bit these days because of the prevalence of single-page applications (SPA) - you should read up on these as they're out of the scope of this talk.
 
 To summarize the concept of an endpoint: it's an area of a web application that can be accessed via a URL through an HTTP request.
 
-Web applications oftentimes will have endpoints that don't have any hyperlinks associated with them. Sometimes these endpoints facilitate access to sensitive data, or provide a user with the ability to do some elevated action in the application that they shouldn't be able to. A good place to start looking for these is in the javascript that's used for the web frontend.
+Web applications oftentimes will have endpoints that don't have any hyperlinks associated with them. Sometimes these endpoints facilitate access to sensitive data or provide a user with the ability to do some elevated action in the application that they shouldn't be able to. A good place to start looking for these is in the javascript that's used for the web frontend.
 
-You can access this code along with a number of other incredibly helpful tools by typing Ctrl-Shift-I. This will open a smaller window in the right hand side of your screen. Let's go ahead and make that easier to work with by clicking the three vertical dots in that menu and then clicking this button:
+You can access this code along with a number of other incredibly helpful tools by typing Ctrl-Shift-I. This will open a smaller window on the right-hand side of your screen. Let's go ahead and make that easier to work with by clicking the three vertical dots in that menu and then clicking this button:
 
 ![](images/devtools_doc.png)
 
-Next, click the **Sources** tab. On the left you'll find a number of files that make up components of the frontend of the application:
+Next, click the **Sources** tab. On the left you'll find several files used for the frontend of the application:
 
 ![](images/frontend_components.png)
 
@@ -100,11 +100,11 @@ We can search all of these files by typing in Ctrl-shift-f and then inputting so
 
 ![](images/regex_search.png)
 
-Regular expressions are outside of the scope of this talk, but you should really learn them. This particular one tells us to search for strings that match `"/oneormorewordcharacters`. It should be noted that in a regular expression you need to escape forward slashes (`/`), so that's what the `\/` is about.
+Regular expressions are outside of the scope of this talk, but you should learn them. This particular one tells us to search for strings that match `"/oneormorewordcharacters`. It should be noted that in a regular expression you need to escape forward slashes (`/`), so that's what the `\/` is about.
 
 This resulted in one javascript file being singled out, `main-es2018.js`.
 
-We can look closer by clicking the name of the file in the left hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
+We can look closer by clicking the name of the file in the left-hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
 
 ![](pp.png)
 
@@ -116,9 +116,9 @@ This will give you a ton of endpoints that you should investigate. The one we're
 You can access pages that you shouldn't be able to. These pages could be built for administration of the site, or facilitate access to sensitive data.
 
 ### DOM Cross-Site Scripting (XSS)
-You may have noticed that there is a search bar at the top of the page. Generally speaking, if you find that you are able to type something into a site and see your input reflected back to you that you should check for XSS. Let's go ahead and give that a shot here.
+You may have noticed that there is a search bar at the top of the page. Generally speaking, if you find that you can type something into a site and see your input reflected back to you, this is a sign that you should check for XSS. Let's go ahead and give that a shot here.
 
-To start, check if your input is reflected back to you. Search for all products with the word 'owasp' in them. You'll notice a bunch of products return back, but you should also note that your input is indeed reflected back to you on the page:
+To start, search for all products with the word 'owasp' in them. You'll see a bunch of products displayed, but more importantly, your input is indeed reflected back to you on the page:
 
 ![](images/input_reflected.png)
 
@@ -130,7 +130,7 @@ Looking at the DOM, it appears that our payload was inserted correctly:
 
 ![](images/script_no_workie_dom.png)
 
-... But it's not working. Fortunately, the scoreboard told us what payload we actually need to use:
+... But it's not working. Fortunately, the scoreboard told us what payload we need to use:
 
 ![](images/scoreboard_payload.png)
 
@@ -148,7 +148,7 @@ docker exec -it juice cat /juice-shop/frontend/src/app/search-result/search-resu
 docker exec -it juice cat /juice-shop/frontend/src/app/search-result/search-result.component.html
 ```
 
-The first file is a typescript file which is generated by AngularJS, the front-end web framework being used by the project. The line of interest to us in this file is this:
+The first file is a typescript file that is generated by AngularJS, the front-end web framework being used by the project. The line of interest to us in this file is this:
 
 ![](images/vuln_xss_code_1.png)
 
@@ -162,7 +162,7 @@ Looking in the second file, we quickly get our answer:
 
 It turns out the content that we provide for the search value gets inserted into the page via `innerHTML`. [The W3C docs](https://www.w3.org/TR/2008/WD-html5-20080610/dom.html#innerhtml0) tell us that script elements do not get executed when they are inserted into a page via `innerHTML`. So even though the search field is vulnerable to XSS, a `script` payload isn't going to work.
 
-These vulnerabilities are quite common and can be found in a number of different products. Back in 2017 and 2018, I actually found a few in a couple of Microsoft products - specifically Sharepoint and Azure. Because Microsoft has a bug bounty program, they actually paid me for these findings! We'll talk about that in a bit - in the meantime, if you want to find more details on those findings, here are the links:
+These vulnerabilities are quite common and can be found in several different products. Back in 2017 and 2018, I found a few in a couple of Microsoft products - specifically Sharepoint and Azure. Because Microsoft has a bug bounty program, I actually got paid for these findings! We'll talk about that in a bit - in the meantime, if you want to find more details on those findings, here are the links:
 
 Sharepoint finding: https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2017-8629
 Azure finding: https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8600
@@ -179,16 +179,16 @@ Feel free to teach yourself more about this attack by using a Jenkins container 
 docker run --rm -d  -p 8080:8080 -p 50000:50000 --name=jenkins jenkins
 ```
 
-Additionally, for some really awesome and out of the box ideas for XSS, check out [this talk](https://www.youtube.com/watch?v=hKdcDce3FW4).
+Additionally, for some awesome and out-of-the-box ideas for XSS, check out [this talk](https://www.youtube.com/watch?v=hKdcDce3FW4).
 
 ### XML External Entities (XXE)
-The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data. This vulnerability can allow you read files on the underlying filesystem, perform SSRF (another vulnerability you should learn about), and in rare cases even get RCE.
+The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data. This vulnerability can allow you to read files on the underlying filesystem, perform SSRF (another vulnerability you should learn about), and in rare cases even get RCE.
 
 
 
 
 
-These vulnerabilities are not as common as XSS, but they are still plenty to be found. Back in 2018, I actually found a few in some Oracle and IBM products. More details can be found at these links:
+These vulnerabilities are not as common as XSS, but they are still plenty to be found. Back in 2018, I found a few in some Oracle and IBM products. More details can be found at these links:
 
 IBM finding: https://www-01.ibm.com/support/docview.wss?uid=swg22015943
 
