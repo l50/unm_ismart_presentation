@@ -41,4 +41,21 @@ If you want to use Windows, all of the products appear to be supported, but we'r
    * Username: `vagrant`
    * Password: `vagrant`
 
+## Stop the VM
+Once you're finished, you can stop the vm with:
+```
+vagrant halt
+```
+This will allow you to come back and start the VM again at a later date with `vagrant up`.
+
+## Destroy the VM
+**Danger, Will Robinson!**
+
+Running the command in this section will destroy your VM - once you run it, it will be gone forever. There are reasons you may want to do this; perhaps your VM simply isn't working properly. 
+
+To **destroy** your VM, run this command:
+```
+vagrant destroy
+```
+
 At this point, you should feel free to move on to [Virtual Machine Setup](1_vm_setup.md).
