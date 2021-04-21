@@ -1,4 +1,4 @@
-# UNM ISMART Presentation on Various Security Topics
+# A little bit of this, a little bit of that - a smorgasbord of practical security skills in firehose format
 
 This repo contains materials for the talk that I'm giving for [UNM - ISMART](https://www.instagram.com/ismartunm) on 4/23/2021.
 
