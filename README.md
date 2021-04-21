@@ -29,3 +29,12 @@ Because we only have 45 minutes and a ton to cover, we are going to touch on sev
 If there's anything that isn't clear or isn't working, please feel free to use the power of [Google](https://google.com) to help you find a solution. If you're really, really stuck and have exhausted all possible avenues that the Internet has provided you with, feel free to [Create an Issue](https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue) in this repo. Maybe you'll get lucky and someone (probably not the author, they're very busy) will be able to respond with something helpful - especially if you provide enough information about the problem. Here's a great resource that you can use to get a sense of what you should include in an issue: https://guides.github.com/features/issues/.
 
 If you find an issue in this repo and can fix it, please feel free to [submit a pull request](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/creating-an-issue-or-pull-request#creating-a-pull-request) with your fix. This is a great way to learn how to get started contributing to an open-source project, which can, in turn, help you to grow as a professional and have something that stands out on your Resume.
+
+## Thanks
+I'm fortunate enough to know a great group of folks that are willing to jump in and give me feedback, help me QA my work, and push me to create the best talks that I possibly can.
+
+The following people helped to make this talk possible:
+- Amanda Minnich
+- Alexander Baker
+- Aleksandar Straumann
+- Javier Chavez
