@@ -245,9 +245,13 @@ If you get through all of the challenges in the juice shop and are looking for m
 There are also several sites that you can hack on without any fear of getting in trouble. 
 
 Here are a few:
+
 https://portswigger.net/web-security/
+
 https://www.hackerone.com/for-hackers/hacker-101
+
 https://github.com/bugcrowd/bugcrowd_university
+
 https://ctfchallenge.com/
 
 At this point, you should feel free to move on to [Bug Bounty Hunting](4_bug_bounty_hunting.md).
