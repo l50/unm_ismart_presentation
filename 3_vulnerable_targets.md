@@ -240,7 +240,7 @@ This vulnerability can allow you to read files on the underlying filesystem, per
 
 
 ## Intentionally Vulnerable Targets
-If you get through all of the challenges in the juice shop and are looking for more intentionally vulnerable containers, please check out my [containers dotfile](https://github.com/l50/dotfiles/blob/master/containers). There are tons of them in there. 
+If you get through all of the challenges in the juice shop and are looking for more intentionally vulnerable containers, please check out my [containers dotfile](https://github.com/l50/dotfiles/blob/master/containers#L21,L31). 
 
 There are also several sites that you can hack on without any fear of getting in trouble. 
 
