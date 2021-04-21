@@ -10,6 +10,7 @@ There are techniques that we'll be covering in this talk that you could use to d
 
 ## whoami
 * Jayson Grace
+* Member of [Red Team X](https://www.wired.com/story/facebook-red-team-x-vulnerabilities/) at Facebook
 * Death Metal Vocalist at [Carrion Kind](https://open.spotify.com/artist/7cglUsJDT5ZpEf9ySwoX3X)
 * Former UNM CS Student (graduated in 2016), sysadmin, SRE, and Red Team Lead
 
