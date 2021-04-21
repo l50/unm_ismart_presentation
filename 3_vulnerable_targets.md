@@ -165,6 +165,7 @@ It turns out the content that we provide for the search value gets inserted into
 These vulnerabilities are quite common and can be found in several different products. Back in 2017 and 2018, I found a few in a couple of Microsoft products - specifically Sharepoint and Azure. Because Microsoft has a bug bounty program, I actually got paid for these findings! We'll talk about that in a bit - in the meantime, if you want to find more details on those findings, here are the links:
 
 Sharepoint finding: https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2017-8629
+
 Azure finding: https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8600
 
 It should be noted that there are multiple types of XSS, but we're not going to cover that here. There's plenty of information you can find on the internet, and ultimately I encourage you to learn what each of them is, and what separates them from the others.
