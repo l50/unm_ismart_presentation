@@ -3,8 +3,7 @@
 This repo contains materials for the talk that I'm giving for [UNM - ISMART](https://www.instagram.com/ismartunm) on 4/23/2021.
 
 ## Legal Stuff
-I am not speaking on behalf of my employer (or any previous employers), nor am I here representing any of my current or previous employers.
-My opinions do not reflect those of my current or previous employers and are solely my own.
+I am not speaking on behalf of my employer (or any previous employers), nor am I here representing any of my current or previous employers. My opinions do not reflect those of my current or previous employers and are solely my own.
 
 There are techniques that we'll be covering in this talk that you could use to do bad things to sites and systems that don't belong to you. Don't even think about it. There are so many legit ways to learn how to hack these days and so many intentionally vulnerable exercises and sites that are made specifically for you to break.
 
