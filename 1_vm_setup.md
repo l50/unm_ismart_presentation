@@ -20,7 +20,13 @@ This section will help you to configure your kali VM that you can use to reprodu
 
 3. Install Docker
 
-   Docker is used to run containers. Containers are used to package applications and be able to run them anywhere. There's plenty more information on the internet that I encourage you to read. Run these commands to install Docker:
+   Docker facilitates running containers. Containers are used to package applications and be able to run them anywhere. 
+
+   While at first glance it may seem like a similar concept to a VM, there are a few key differences. VMs use a hypervisor to virtualize physical hardware, and each VM has a guest OS along with a virtual copy of the hardware needed by the OS to run. Containers on the other hand virtualize the OS, so each container only needs to provide an application and its libraries.
+
+   There's plenty more information on the internet that I encourage you to read. Containers are a big deal in the industry and won't be going anywhere anytime soon.
+
+   Run these commands to install Docker:
    ```
    wget https://raw.githubusercontent.com/l50/unm_ismart_presentation/main/scripts/kali_docker.sh
    bash kali_docker.sh
