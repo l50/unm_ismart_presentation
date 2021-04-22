@@ -15,18 +15,18 @@ DOCKER_USER='vagrant'
 usage() { echo "Usage: $0 [-u yourusername | --user yourusername ]" 1>&2; exit 1; }
 
 install_docker() {
-    printf "%s\n" "deb [arch=amd64] https://download.docker.com/linux/debian buster stable" \
+  printf "%s\n" "deb [arch=amd64] https://download.docker.com/linux/debian buster stable" \
     | sudo tee /etc/apt/sources.list.d/docker-ce.list
-    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-    sudo apt-get update
-    sudo apt-get install -y \
+      curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+      sudo apt-get update
+      sudo apt-get install -y \
         containerd.io \
         docker-ce \
         docker-ce-cli
 }
 
 set_docker_user() {
-    sudo usermod -aG docker vagrant
+  sudo usermod -aG docker $DOCKER_USER
 }
 
 # Get input parameters
@@ -37,18 +37,17 @@ eval set -- "${parameters}"
 while true; do
   case "$1" in
     -h|--help)
-        usage
-        exit 0
-        ;;
+      usage
+      exit 0
+      ;;
     -u|--user)
-        DOCKER_USER="$2"
-        shift 2
-        ;;
+      DOCKER_USER="$2"
+      shift 2
+      ;;
     --) 
-        shift; break ;;
+      shift; break ;;
   esac
 done
-
 
 install_docker
 set_docker_user $DOCKER_USER
