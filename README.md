@@ -34,7 +34,7 @@ If you find an issue in this repo and can fix it, please feel free to [submit a 
 I'm fortunate enough to know a great group of folks that are willing to jump in and give me feedback, help me QA my work, and push me to create the best talks that I possibly can.
 
 The following people helped to make this talk possible:
-- Amanda Minnich
 - Alexander Baker
 - Aleksandar Straumann
+- Amanda Minnich
 - Javier Chavez
