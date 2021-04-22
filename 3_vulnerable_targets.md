@@ -113,7 +113,7 @@ Now you should be able to click on the file and do another search specific to th
 This will give you a ton of endpoints that you should investigate. The one we're interested in is `/score-board`, which is found on line 12972. Navigating to this endpoint ([http://localhost:3005/#/score-board](http://localhost:3005/#/score-board)) shows us the various challenges that exist in the project and gives us a flag.
 
 #### Why is this vulnerability a concern?
-You can access pages that you shouldn't be able to. These pages could be built for administration of the site, or facilitate access to sensitive data.
+In this case, the endpoint provides you, the attacker, with a ton of information about vulnerabilities in the web application. For real-world targets, these sorts of endpoints can give an attacker access to administrative functionality, sensitive data, or even provide a means to take over the entire site.
 
 ### DOM Cross-Site Scripting (XSS)
 You may have noticed that there is a search bar at the top of the page. Generally speaking, if you find that you can type something into a site and see your input reflected back to you, this is a sign that you should check for XSS. Let's go ahead and give that a shot here.
