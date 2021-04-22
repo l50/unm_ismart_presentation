@@ -19,8 +19,7 @@ Thanks for checking out this talk.
 
 I appreciate your time and hope you've learned something useful.
 
-
-# References
+## Additional Resources
 
 [![Crossover](https://img.youtube.com/vi/HbcY1HQtLms/0.jpg)](https://youtu.be/HbcY1HQtLms)
 <br/><br/>

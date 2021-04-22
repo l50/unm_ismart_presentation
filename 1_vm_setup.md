@@ -72,12 +72,11 @@ This section will help you to configure your kali VM that you can use to reprodu
 
 At this point, you should feel free to move on to [Web Basics](2_web_basics.md).
 
+## Additional Resources
 
-# References
-
-* Install docker manually [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
-* What is Burp [Burp Pages](https://portswigger.net/burp)
-* Open Source alternative to Burp [OWASP Zap](https://owasp.org/www-project-zap/)
+* Install docker manually - [official install docs](https://docs.docker.com/engine/install/)
+* What is Burp - [official documentation](https://portswigger.net/burp)
+* Open Source alternative to Burp - [OWASP Zap](https://owasp.org/www-project-zap/)
 <br/><br/>
 [![Hammond](https://img.youtube.com/vi/T47SIBZSVOo/0.jpg)](https://youtu.be/T47SIBZSVOo)
 <br/><br/>

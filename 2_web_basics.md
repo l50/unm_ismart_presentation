@@ -27,8 +27,10 @@ Do feel free to spend time later trying this out with several of the sites you r
 
 At this point, you should feel free to move on to [Vulnerable Targets](3_vulnerable_targets.md).
 
-# References
+## Additional Resources
 
-* [![Basics with Hammond](https://img.youtube.com/vi/G3hpAeoZ4ek/0.jpg)](https://youtu.be/G3hpAeoZ4ek)
-* [![TomNomNom Fundamentals](https://img.youtube.com/vi/9uebakqWlB0/0.jpg)](https://youtu.be/9uebakqWlB0)
-* [![Rest API](https://img.youtube.com/vi/lsMQRaeKNDk/0.jpg)](https://youtu.be/lsMQRaeKNDk)
+[![Basics with Hammond](https://img.youtube.com/vi/G3hpAeoZ4ek/0.jpg)](https://youtu.be/G3hpAeoZ4ek)
+
+[![TomNomNom Fundamentals](https://img.youtube.com/vi/9uebakqWlB0/0.jpg)](https://youtu.be/9uebakqWlB0)
+
+[![Rest API](https://img.youtube.com/vi/lsMQRaeKNDk/0.jpg)](https://youtu.be/lsMQRaeKNDk)

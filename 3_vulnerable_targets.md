@@ -257,11 +257,8 @@ https://ctfchallenge.com/
 
 At this point, you should feel free to move on to [Bug Bounty Hunting](4_bug_bounty_hunting.md).
 
+## Additional Resources
 
-# References
-
-* XSS and other descriptions of vulnerabilities [Portswigger XSS + Other Vulns](https://portswigger.net/web-security/cross-site-scripting)
-<br/><br/>
 [![Find your first XSS](https://img.youtube.com/vi/IWbmP0Z-yQg/0.jpg)](https://youtu.be/IWbmP0Z-yQg)
 <br/><br/>
 [![XXE](https://img.youtube.com/vi/aSiIHKeN3ys/0.jpg)](https://youtu.be/aSiIHKeN3ys)
