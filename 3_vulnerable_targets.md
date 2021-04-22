@@ -256,3 +256,16 @@ https://github.com/bugcrowd/bugcrowd_university
 https://ctfchallenge.com/
 
 At this point, you should feel free to move on to [Bug Bounty Hunting](4_bug_bounty_hunting.md).
+
+
+# References
+
+* XSS and other descriptions of vulnerabilities [Portswigger XSS + Other Vulns](https://portswigger.net/web-security/cross-site-scripting)
+<br/><br/>
+[![Find your first XSS](https://img.youtube.com/vi/IWbmP0Z-yQg/0.jpg)](https://youtu.be/IWbmP0Z-yQg)
+<br/><br/>
+[![XXE](https://img.youtube.com/vi/aSiIHKeN3ys/0.jpg)](https://youtu.be/aSiIHKeN3ys)
+<br/><br/>
+[![Methodology](https://img.youtube.com/vi/uKWu6yhnhbQ/0.jpg)](https://youtu.be/uKWu6yhnhbQ)
+<br/><br/>
+[![Insider PHd Methodology](https://img.youtube.com/vi/5oUNvWwKPtI/0.jpg)](https://youtu.be/5oUNvWwKPtI)

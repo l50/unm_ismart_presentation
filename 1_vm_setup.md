@@ -65,3 +65,16 @@ This section will help you to configure your kali VM that you can use to reprodu
    ![](images/annoying_popup.png)
 
 At this point, you should feel free to move on to [Web Basics](2_web_basics.md).
+
+
+# References
+
+* Install docker manually [Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
+* What is Burp [Burp Pages](https://portswigger.net/burp)
+* Open Source alternative to Burp [OWASP Zap](https://owasp.org/www-project-zap/)
+<br/><br/>
+[![Hammond](https://img.youtube.com/vi/T47SIBZSVOo/0.jpg)](https://youtu.be/T47SIBZSVOo)
+<br/><br/>
+[![Chuck](https://img.youtube.com/vi/eGz9DS-aIeY/0.jpg)](https://youtu.be/eGz9DS-aIeY)
+<br/><br/>
+[![Stok IDOR](https://img.youtube.com/vi/3K1-a7dnA60/0.jpg)](https://youtu.be/3K1-a7dnA60)

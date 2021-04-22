@@ -59,3 +59,9 @@ vagrant destroy
 ```
 
 At this point, you should feel free to move on to [Virtual Machine Setup](1_vm_setup.md).
+
+# References
+
+* Vagrant Setup [Installation](https://www.vagrantup.com/docs/installation)
+<br/><br/>
+[![Video](https://img.youtube.com/vi/wX75Z-4MEoM/0.jpg)](https://www.youtube.com/watch?v=wX75Z-4MEoM "Network Chuck")

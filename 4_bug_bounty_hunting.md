@@ -18,3 +18,15 @@ Some companies have their own bug bounty programs, such as [Facebook](https://ww
 Thanks for checking out this talk. 
 
 I appreciate your time and hope you've learned something useful.
+
+
+# References
+
+[![Crossover](https://img.youtube.com/vi/HbcY1HQtLms/0.jpg)](https://youtu.be/HbcY1HQtLms)
+<br/><br/>
+[![CyberMentor](https://img.youtube.com/vi/qlK174d_uu8/0.jpg)](https://youtu.be/qlK174d_uu8)
+<br/><br/>
+[![Putting your mind to it](https://img.youtube.com/vi/-PkK9DP5nec/0.jpg)](https://youtu.be/-PkK9DP5nec)
+<br/><br/>
+[![Live Session](https://img.youtube.com/vi/nPK0x3jU4wQ/0.jpg)](https://youtu.be/nPK0x3jU4wQ)
+<br/><br/>
