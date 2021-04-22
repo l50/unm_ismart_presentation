@@ -96,7 +96,7 @@ Next, click the **Sources** tab. On the left you'll find several files used for 
 
 ![](images/frontend_components.png)
 
-We can search all of these files by typing in Ctrl-shift-f and then inputting some string that we want to search for. In this case, we'll go ahead and enable regular expressions and then search for `"\/w+`:
+We can search all of these files by typing in Ctrl-shift-f and then inputting some string that we want to search for. In this case, we'll go ahead and enable regular expressions and then search for `"\/\w+`:
 
 ![](images/regex_search.png)
 
