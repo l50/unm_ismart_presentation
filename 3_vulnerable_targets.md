@@ -1,5 +1,5 @@
 # Vulnerable Targets
-This section brings together all of the things that we've done so far. We're going to apply some of what we learned about the web to attack some intentionally vulnerable targets.
+This section brings together all of the things that we've done so far. We're going to apply some of what we learned about the web to attack an intentionally vulnerable target.
 
 ## Using Docker to get intentionally vulnerable applications
 Docker is a subject that we could talk about for hours on end. One application that is especially helpful for aspiring security folks like yourselves is standing up intentionally vulnerable web applications. I'm going to throw you all in the deep end a bit here; we're going to be learning about Docker as we go along, and it'll probably be overwhelming. That's why this stuff is online, so you can revisit it later.
@@ -68,13 +68,13 @@ We will touch a teensy bit on finding vulnerabilities through source code review
 Let's touch on some common vulnerabilities in web applications. In particular, how to find them, and why they're a concern.
 
 ### Hidden paths in source code
-Web applications tend to have several endpoints that a user can browse to. For example, if we click the side menu and then click on **Customer Feedback**:
+Web applications tend to have several endpoints that a user can browse to. An endpoint is an area of a web application that can be accessed via a URL through an HTTP request. For example, if we click the side menu and then click on **Customer Feedback**:
 
 ![](images/sidemenu.png)
 
 we will be taken to [http://localhost:3005/#/contact](http://localhost:3005/#/contact). In this case, the endpoint is `/contact`. It follows a `#`, which is used to signal that a fragment identifier will follow it. A fragment identifier is used to grab a resource from the HTML of a given page. It should be noted that this is a client-side operation, which means that anything following a `#` will not be sent back to the server.
 
-To get a better sense of what this means, type Ctrl-Shift-I to pull up open a smaller window on the right-hand side of your screen. Let's go ahead and detach this window to make our lives easier by clicking the three vertical dots in that menu and then clicking this button:
+To get a better sense of what this means, type Ctrl-Shift-I to pull up open a smaller window on the right-hand side of your screen. This facilitates opening DevTools, an exceptionally useful set of web developer tools built into the browser. Let's go ahead and detach this window to make our lives easier by clicking the three vertical dots in that menu and then clicking this button:
 
 ![](images/devtools_doc.png)
 
@@ -84,15 +84,9 @@ Next, click the **Elements** tab. You should now have a representation of the DO
 
 It appears that in this case, the `#` refers to a Hypertext REFerence (`href`): `href="#/contact"`. If you're not familiar, an `href` is used to link to another page on a site. By inputting `#/contact`, we are signaling to our browser that it should try and navigate to that part of the page. These are used quite a bit these days because of the prevalence of single-page applications (SPA) - you should read up on these, but they are out of the scope of this talk.
 
-To summarize the concept of an endpoint: it's an area of a web application that can be accessed via a URL through an HTTP request.
-
 Web applications oftentimes will have endpoints that don't have any hyperlinks associated with them. Sometimes these endpoints facilitate access to sensitive data or provide a user with the ability to do some elevated action in the application that they shouldn't be able to. A good place to start looking for these is in the JavaScript that's used for the web frontend.
 
-You can access this code along with a number of other incredibly helpful tools by typing Ctrl-Shift-I. This will open a smaller window on the right-hand side of your screen. Let's go ahead and make that easier to work with by clicking the three vertical dots in that menu and then clicking this button:
-
-![](images/devtools_doc.png)
-
-Next, click the **Sources** tab. On the left you'll find several files used for the frontend of the application:
+To review this code, we'll use DevTools again. This time click the **Sources** tab. On the left you'll find several files used for the frontend of the application:
 
 ![](images/frontend_components.png)
 
@@ -102,7 +96,7 @@ We can search all of these files by typing in Ctrl-shift-f and then inputting so
 
 Regular expressions are outside of the scope of this talk, but you should learn them. This particular one tells us to search for strings that match `"/oneormorewordcharacters`. It should be noted that in a regular expression you need to escape forward slashes (`/`), so that's what the `\/` is about.
 
-This resulted in one javascript file being singled out, `main-es2018.js`.
+This narrowed down our search to two javascript files: `main-es2018.js` and `vendor-es2018.js`.
 
 We can look more closely by clicking the name of the file in the left-hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
 
@@ -116,13 +110,13 @@ This will give you a ton of endpoints that you should investigate. The one we're
 In this case, the endpoint provides you, the attacker, with a ton of information about vulnerabilities in the web application. For real-world targets, these sorts of endpoints can give an attacker access to administrative functionality, sensitive data, or even provide a means to take over the entire site.
 
 ### DOM Cross-Site Scripting (XSS)
-You may have noticed that there is a search bar at the top of the page. Generally speaking, if you find that you can type something into a site and see your input reflected back to you, this is a sign that you should check for XSS. Let's go ahead and give that a shot here.
+You may have noticed that there is a search bar at the top of the page. If you find that you can type something into a site and see your input reflected back to you, this is a sign that you should check for XSS. Let's go ahead and give that a shot here.
 
 To start, search for all products with the word 'owasp' in them. You'll see a bunch of products displayed, but more importantly, your input is indeed reflected back to you on the page:
 
 ![](images/input_reflected.png)
 
-This is your indicator that it's time to look for XSS. Generally speaking, most people start with `<script>alert('xss')</script>`. If you give that a try, it doesn't appear to work:
+This is your indicator that it's time to look for XSS. Most people start with `<script>alert('xss')</script>`. If you give that a try, it doesn't appear to work:
 
 ![](images/script_no_workie.png)
 
@@ -265,4 +259,4 @@ At this point, you should feel free to move on to [Bug Bounty Hunting](4_bug_bou
 <br/><br/>
 [![Methodology](https://img.youtube.com/vi/uKWu6yhnhbQ/0.jpg)](https://youtu.be/uKWu6yhnhbQ)
 <br/><br/>
-[![Insider PHd Methodology](https://img.youtube.com/vi/5oUNvWwKPtI/0.jpg)](https://youtu.be/5oUNvWwKPtI)
+[![Insider PhD Methodology](https://img.youtube.com/vi/5oUNvWwKPtI/0.jpg)](https://youtu.be/5oUNvWwKPtI)

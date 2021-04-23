@@ -20,7 +20,7 @@ This section will help you to configure your kali VM that you can use to reprodu
 
 3. Install Docker
 
-   Docker facilitates running containers. Containers are used to package applications, /b{and be able to run them anywhere.}
+   Docker facilitates running containers. Containers are used to package applications, which makes it easier to move them to other systems and have them behave the same way as they did on your system.
 
    While at first glance it may seem like a similar concept to a VM, there are a few key differences. VMs use a hypervisor to virtualize physical hardware, and each VM has a guest OS along with a virtual copy of the hardware needed by the OS to run. Containers, on the other hand, virtualize the OS, so each container only needs to provide an application and its libraries.
 

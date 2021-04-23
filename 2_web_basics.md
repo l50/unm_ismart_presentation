@@ -21,7 +21,7 @@ It's a bit unwieldy to keep having to click **Forward**. I'm going to show you a
 
 1. Click **Intercept is on** to turn it off
 2. Click **HTTP history** - this has a listing of all of the requests and responses you've accumulated
-3. Click `#^` to get the order of requests in descending order. This tends to be how I like to view web traffic.
+3. Click the `#` in the upper left-hand side to modify the order of the requests - I like descending order myself.
 
 Feel free to spend time later trying this out with several of the sites you regularly visit to get a sense of how they work.
 
