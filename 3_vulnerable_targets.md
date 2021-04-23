@@ -2,7 +2,7 @@
 This section brings together all of the things that we've done so far. We're going to apply some of what we learned about the web to attack some intentionally vulnerable targets.
 
 ## Using Docker to get intentionally vulnerable applications
-Docker is a subject that we could talk about for hours on end. One application that is especially helpful for aspiring security folks like yourselves is standing up intentionally vulnerable web applications. I'm going to throw you all in the deep end a bit here; we're going to be learning a bit about docker as we go along, and it'll probably be overwhelming. That's why this stuff is online, so you can revisit it later.
+Docker is a subject that we could talk about for hours on end. One application that is especially helpful for aspiring security folks like yourselves is standing up intentionally vulnerable web applications. I'm going to throw you all in the deep end a bit here; we're going to be learning about Docker as we go along, and it'll probably be overwhelming. That's why this stuff is online, so you can revisit it later.
 
 Let's start with one of my favorites, the OWASP Juice Shop.
 
@@ -53,14 +53,14 @@ If we wanted to get a better sense of how this application was running, we can g
    67 juicer    0:00 ps
    ```
 
-   This output tells us a couple of things. First and foremost, this target appears to be built with Node.js, so we can look for known vulnerabilities associated with that language. We also learn that the application is started by running `node build/app`. 
-   
+   This output tells us a couple of things. First and foremost, this target appears to be built with Node.js, so we can look for known vulnerabilities associated with that language. We also learn that the application is started by running `node build/app`.
+
    If you're curious, you can execute this command: `cat build/app.js` to view the contents of that particular file.
 
    I encourage you to spend more time looking around later to get a better sense of how the application is running.
 
 ### Attack Methodology
-Generally, when I'm looking at a target I like to review the source code if it is made available. In this case, we can view the source code [here](https://github.com/bkimminich/juice-shop), since this is an open-source project. 
+Generally, when I'm looking at a target I like to review the source code if it is made available. In this case, we can view the source code [here](https://github.com/bkimminich/juice-shop), since this is an open-source project.
 
 We will touch a teensy bit on finding vulnerabilities through source code review, but you should really invest time in learning it. It makes you a substantially better hacker.
 
@@ -76,17 +76,17 @@ we will be taken to [http://localhost:3005/#/contact](http://localhost:3005/#/co
 
 To get a better sense of what this means, type Ctrl-Shift-I to pull up open a smaller window on the right-hand side of your screen. Let's go ahead and detach this window to make our lives easier by clicking the three vertical dots in that menu and then clicking this button:
 
-![](images/devtools_doc.png) 
+![](images/devtools_doc.png)
 
 Next, click the **Elements** tab. You should now have a representation of the DOM that you can view. This has the HTML that makes up the page that you're interacting with in your browser. Type in Ctrl-f to search for something on the page. Input `#/contact` and hit enter. You should see something similar to this:
 
 ![](images/search_dom.png)
 
-It appears that in this case, the `#` refers to a Hypertext REFerence (`href`): `href="#/contact"`. If you're not familiar, an `href` is used to link to another page on a site. By inputting `#/contact`, we are signaling to our browser that it should try and navigate to that part of the page. These are used quite a bit these days because of the prevalence of single-page applications (SPA) - you should read up on these as they're out of the scope of this talk.
+It appears that in this case, the `#` refers to a Hypertext REFerence (`href`): `href="#/contact"`. If you're not familiar, an `href` is used to link to another page on a site. By inputting `#/contact`, we are signaling to our browser that it should try and navigate to that part of the page. These are used quite a bit these days because of the prevalence of single-page applications (SPA) - you should read up on these, but they are out of the scope of this talk.
 
 To summarize the concept of an endpoint: it's an area of a web application that can be accessed via a URL through an HTTP request.
 
-Web applications oftentimes will have endpoints that don't have any hyperlinks associated with them. Sometimes these endpoints facilitate access to sensitive data or provide a user with the ability to do some elevated action in the application that they shouldn't be able to. A good place to start looking for these is in the javascript that's used for the web frontend.
+Web applications oftentimes will have endpoints that don't have any hyperlinks associated with them. Sometimes these endpoints facilitate access to sensitive data or provide a user with the ability to do some elevated action in the application that they shouldn't be able to. A good place to start looking for these is in the JavaScript that's used for the web frontend.
 
 You can access this code along with a number of other incredibly helpful tools by typing Ctrl-Shift-I. This will open a smaller window on the right-hand side of your screen. Let's go ahead and make that easier to work with by clicking the three vertical dots in that menu and then clicking this button:
 
@@ -104,7 +104,7 @@ Regular expressions are outside of the scope of this talk, but you should learn 
 
 This resulted in one javascript file being singled out, `main-es2018.js`.
 
-We can look closer by clicking the name of the file in the left-hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
+We can look more closely by clicking the name of the file in the left-hand menu and then clicking `{}` for pretty print. Alternatively, you can also click the **Pretty-print** button when prompted to achieve the same thing:
 
 ![](images/pp.png)
 
@@ -144,7 +144,7 @@ More importantly, we should probably answer the question of "Why didn't my first
 
 Ultimately, these sorts of questions can be quickly answered by looking at the source code. The two files of interest to us can be accessed by running the following commands from your terminal:
 ```
-docker exec -it juice cat /juice-shop/frontend/src/app/search-result/search-result.component.ts  
+docker exec -it juice cat /juice-shop/frontend/src/app/search-result/search-result.component.ts
 docker exec -it juice cat /juice-shop/frontend/src/app/search-result/search-result.component.html
 ```
 
@@ -154,9 +154,9 @@ The first file is a typescript file that is generated by AngularJS, the front-en
 
 This tells us that the search value is using a known vulnerable method. As per its [documentation](https://angular.io/api/platform-browser/DomSanitizer), the method trusts the given value to be safe HTML.
 
-Great, we know why the vulnerability is there, but why didn't our first payload - `<script>alert('xss')</script>` work?
+Great, we know why the vulnerability is there, but why didn't our first payload - `<script>alert('xss')</script> `work?
 
-Looking in the second file, we quickly get our answer: 
+Looking in the second file, we quickly get our answer:
 
 ![](images/vuln_xss_code_2.png)
 
@@ -171,7 +171,7 @@ Azure finding: https://portal.msrc.microsoft.com/en-US/security-guidance/advisor
 It should be noted that there are multiple types of XSS, but we're not going to cover that here. There's plenty of information you can find on the internet, and ultimately I encourage you to learn what each of them is, and what separates them from the others.
 
 #### Why is this vulnerability a concern?
-XSS is an immensely powerful vulnerability. It allows you to run arbitrary javascript within the context of a vulnerable application. You as the attacker have a whole language at your disposal - the possibilities are endless. 
+XSS is an immensely powerful vulnerability. It allows you to run arbitrary JavaScript within the context of a vulnerable application. You as the attacker have a whole language at your disposal - the possibilities are endless.
 
 I find a lot of success daisy chaining XSS with other vulnerabilities for maximum impact. For example, [Jenkins](https://www.jenkins.io/) is a tool that's used to automate building, testing, and deploying software. One of the features it includes is a console in which you can run arbitrary [Groovy](https://groovy-lang.org/) code. So finding a cross-site scripting vulnerability in Jenkins can ultimately be used to get Remote Code Execution (RCE) on the underlying server. RCEs are considered some of the worst vulnerabilities in our industry.
 
@@ -183,13 +183,13 @@ docker run --rm -d  -p 8080:8080 -p 50000:50000 --name=jenkins jenkins
 Additionally, for some awesome and out-of-the-box ideas for XSS, check out [this talk](https://www.youtube.com/watch?v=hKdcDce3FW4).
 
 ### XML External Entities (XXE)
-The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data. 
+The last vulnerability I wanted to cover is XML External Entity attacks. This is one of my personal favorites - it is an injection vulnerability that exploits a vulnerable XML parser. [Extensible Markup Language (XML)](https://en.wikipedia.org/wiki/XML#:~:text=Extensible%20Markup%20Language%20(XML)%20is,free%20open%20standards%E2%80%94define%20XML.) is a markup language that's commonly used to transfer data.
 
-Navigate to http://localhost:3005/#/complain. This is another endpoint you can discover through the methodology we discussed earlier in the `Hidden paths in source code` section. 
+Navigate to http://localhost:3005/#/complain. This is another endpoint you can discover through the methodology we discussed earlier in the `Hidden paths in source code` section.
 
-We are presented with a form which allows us to specify a message and an invoice. Because this form will presumably be read later by someone who may have elevated privileges in the application, this provides us with a number of opportunities to consider. For the message, we could try XSS payloads to see if there's a Blind XSS (go read what that is). Because we can upload a file, we can try uploading a webshell, or we could try uploading some malicious XML. Let's opt to do the latter.
+We are presented with a form which allows us to specify a message and an invoice. Because this form will presumably be read later by someone who may have elevated privileges in the application, this provides us with a number of opportunities to consider. For the message, we could try XSS payloads to see if there's a Blind XSS (go read what that is). Because we can upload a file, we can try uploading a web shell, or we could try uploading some malicious XML. Let's opt to do the latter.
 
-We will create `evil.xml` in the vagrant user's desktop with our malicious payload in it using the following script:
+We will create `evil.xml` in the Vagrant user's desktop with our malicious payload in it using the following script:
 ```
 cat > ~/Desktop/evil.xml << 'EOM'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -218,9 +218,9 @@ EOM
 
 Confirm the file is now in place with `cat ~/Desktop/evil.xml`.
 
-Now go back to the page, enter in a random message, and click **Choose File**. 
+Now go back to the page, enter in a random message, and click **Choose File**.
 
-Next, click **Desktop** on the left hand side.
+Next, click **Desktop** on the left-hand side.
 
 There is a dropdown menu on the lower right-hand side of the screen that reads "Custom Files." Click this and select **All Files** to reveal `evil.xml`, which you should select and then click **Open**.
 
@@ -241,9 +241,9 @@ This vulnerability can allow you to read files on the underlying filesystem, per
 
 
 ## Intentionally Vulnerable Targets
-If you get through all of the challenges in the juice shop and are looking for more intentionally vulnerable containers, please check out my [containers dotfile](https://github.com/l50/dotfiles/blob/master/containers#L21,L31). 
+If you get through all of the challenges in the juice shop and are looking for more intentionally vulnerable containers, please check out my [containers dotfile](https://github.com/l50/dotfiles/blob/master/containers#L21,L31).
 
-There are also several sites that you can hack on without any fear of getting in trouble. 
+There are also several sites that you can hack on without any fear of getting in trouble.
 
 Here are a few:
 
