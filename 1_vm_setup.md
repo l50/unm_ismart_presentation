@@ -28,7 +28,7 @@ This section will help you to configure your kali VM that you can use to reprodu
 
    Run these commands to install Docker:
    ```
-   wget https://raw.githubusercontent.com/l50/unm_ismart_presentation/main/scripts/kali_docker.sh
+   wget https://raw.githubusercontent.com/l50/starter_hack_lab/main/scripts/kali_docker.sh
    bash kali_docker.sh
    ```
 
